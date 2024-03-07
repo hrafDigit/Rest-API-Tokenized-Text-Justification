@@ -1,0 +1,12 @@
+# Ignore temporary files
+*.tmp
+.DS_Store
+
+# ignore all logs
+*.log
+
+# ignore '.env' file
+.env
+
+# ignore ALL files in ANY directory named node_modules
+node_modules/
