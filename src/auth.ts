@@ -7,13 +7,11 @@ implement a function to generate a JWT token.
 
 import jwt from 'jsonwebtoken';
 
-// Replace with a secure secret key
-// const SECRET_KEY = 'your_secret_key';
-const SECRET_KEY = 'xARQ7WPRJLUWrZm12fXhulzCZutNj';
+// Read secret key and token word limit from environment variables .env
+const SECRET_KEY = process.env.SECRET_KEY || 'default_secret_key';
+const TOKEN_WORD_LIMIT = parseInt(process.env.TOKEN_WORD_LIMIT || '80000', 10);
 
-const TOKEN_WORD_LIMIT = 80000;
-
-// Define a custom type to represent token word count object
+// Define Types for token-object (words count).
 interface TokenWordCount {
     [token: string]: {
         count: number;
@@ -21,7 +19,7 @@ interface TokenWordCount {
     };
 }
 
-// This object will keep track of the number of words processed per token per day
+// Define Object to keep track for the number of words per token per day
 const tokenWordCount: TokenWordCount = {};
 
 export function generateToken(email: string): string {
