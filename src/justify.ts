@@ -1,77 +1,71 @@
-import express, { Request, Response } from 'express';
-import { isWordLimitExceeded, incrementWordCount } from './auth';
+// src/justify.ts
+import express from "express";
+import { incrementWordCount } from "./rateLimit";
 
 const router = express.Router();
 
 function justifyText(text: string, lineLength: number): string {
-    if (!text || typeof text !== 'string') {
-        return ''; // Return empty string for invalid input
-    }
+    // Split the text into an array of words
+    const words = text.split(/\s+/);
 
-    const words = text.split(' ');
-    let currentLine: string = '';
-
+    // Initialize variables to store the current line and the justified lines
+    let currentLine = '';
     const justifiedLines: string[] = [];
 
+    // Iterate over each word
     for (const word of words) {
+        // Check if adding the word to the current line exceeds the line length
         if ((currentLine + word).length <= lineLength) {
+            // If not, add the word to the current line
             currentLine += word + ' ';
         } else {
+            // If adding the word exceeds the line length, push the current line to the justified lines
             justifiedLines.push(currentLine.trim());
+            // Start a new line with the current word
             currentLine = word + ' ';
         }
     }
 
-    if (typeof currentLine === 'string') {
-        justifiedLines.push(currentLine.trim());
-    }
+    // Push the last line to the justified lines
+    justifiedLines.push(currentLine.trim());
 
-    const justifiedText = justifiedLines
-        .map((line) => {
-            const wordsInLine = line.split(' ');
-            const numSpacesToAdd = lineLength - line.length + wordsInLine.length - 1;
-            const spacesPerWord = Math.floor(numSpacesToAdd / (wordsInLine.length - 1));
-            const extraSpaces = numSpacesToAdd % (wordsInLine.length - 1);
+    // Join the justified lines with newline characters
+    const justifiedText = justifiedLines.join('\n');
 
-            let justifiedLine = '';
-            for (let i = 0; i < wordsInLine.length - 1; i++) {
-                justifiedLine += wordsInLine[i] + ' '.repeat(spacesPerWord);
-                if (i < extraSpaces) {
-                    justifiedLine += ' ';
-                }
-            }
-            justifiedLine += wordsInLine[wordsInLine.length - 1];
-            return justifiedLine;
-        })
-        .join('\n');
-
+    // Return the justified text
     return justifiedText;
 }
 
-router.post('/', (req: Request, res: Response) => {
+router.post("/", (req, res) => {
     const { text } = req.body;
-    const token = req.header('Authorization')?.split(' ')[1];
-
-    if (!text || typeof text !== 'string') {
-        return res.status(400).json({ error: 'Invalid text' });
+    if (!text || typeof text !== "string") {
+        return res.status(400).json({ error: "Invalid text" });
     }
 
+    const token = req.header("Authorization")?.split(" ")[1];
     if (!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    if (isWordLimitExceeded(token)) {
-        return res.status(402).json({ error: 'Payment Required' });
+        return res.status(401).json({ error: "Unauthorized" });
     }
 
     const wordCount = text.trim().split(/\s+/).length;
     incrementWordCount(token, wordCount);
 
-    const justifiedText = justifyText(text, 80); // Assuming a line length of 80 characters
-    res.set('Content-Type', 'text/plain').send(justifiedText);
+    // Escape special characters in the input text
+    const escapedText = JSON.stringify(text)
+        .slice(1, -1)
+        .replace(/\\'/g, "'") // Unescape apostrophes
+        .replace(/\\"/g, '"'); // Unescape quotes
+
+    // Justify the escaped text assuming line max. equal 80 char
+    const justifiedText = justifyText(escapedText, 80);
+
+    // Send the justified text as plain text response
+    res.set("Content-Type", "text/plain; charset=utf-8").send(justifiedText);
+
 });
 
 export default router;
+
 
 
 

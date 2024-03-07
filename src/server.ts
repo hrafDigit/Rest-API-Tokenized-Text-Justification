@@ -25,8 +25,9 @@ You should receive a response containing a JWT token ; which is mandatory to use
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import { generateToken, isWordLimitExceeded, incrementWordCount } from './auth';
 import justifyRouter from './justify';
+import { tokenHandler } from './auth';
+import { wordLimitHandler } from './rateLimit';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -36,34 +37,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+app.post('/api/token', tokenHandler);
 
-app.post('/api/token', (req, res) => {
-  const { email } = req.body;
-  if (!email || typeof email !== 'string') {
-    return res.status(400).json({ error: 'Invalid email' });
-  }
-
-  const token = generateToken(email);
-  res.json({ token });
-});
-
-app.use('/api/justify', (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  if (isWordLimitExceeded(token)) {
-    return res.status(402).json({ error: 'Payment Required' });
-  }
-
-  next();
-});
-
-app.use('/api/justify', justifyRouter);
+app.use('/api/justify', wordLimitHandler, justifyRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
 
 

@@ -1,26 +1,16 @@
 // src/auth.ts
 /*
-––– Implement Token Generation Endpoint –––
+––– Implement Token Generation –––
 Once created a new file named auth.ts inside the src directory,
 implement a function to generate a JWT token.
 */
 
+
+import express from 'express';
 import jwt from 'jsonwebtoken';
 
 // Read secret key and token word limit from environment variables .env
 const SECRET_KEY = process.env.SECRET_KEY || 'default_secret_key';
-const TOKEN_WORD_LIMIT = parseInt(process.env.TOKEN_WORD_LIMIT || '80000', 10);
-
-// Define Types for token-object (words count).
-interface TokenWordCount {
-    [token: string]: {
-        count: number;
-        date: string;
-    };
-}
-
-// Define Object to keep track for the number of words per token per day
-const tokenWordCount: TokenWordCount = {};
 
 export function generateToken(email: string): string {
     return jwt.sign({ email }, SECRET_KEY, { expiresIn: '1h' });
@@ -35,22 +25,30 @@ export function validateToken(token: string): boolean {
     }
 }
 
-export function incrementWordCount(token: string, wordCount: number): void {
-    const today = new Date().toISOString().split('T')[0];
-    if (!tokenWordCount[token]) {
-        tokenWordCount[token] = { count: 0, date: today };
+// Define any other authentication-related functions here
+
+
+// Define authenticateToken function
+export const authenticateToken: express.RequestHandler = (req, res, next) => {
+    const token = req.header('Authorization')?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
-    if (today !== tokenWordCount[token].date) {
-        tokenWordCount[token] = { count: 0, date: today };
+    if (!validateToken(token)) {
+        return res.status(401).json({ error: 'Invalid token' });
     }
-    tokenWordCount[token].count += wordCount;
-}
+    next();
+};
 
-export function isWordLimitExceeded(token: string): boolean {
-    return tokenWordCount[token]?.count > TOKEN_WORD_LIMIT;
-}
+export const tokenHandler: express.RequestHandler = (req, res) => {
+    const { email } = req.body;
+    if (!email || typeof email !== 'string') {
+        return res.status(400).json({ error: 'Invalid email' });
+    }
 
-
+    const token = generateToken(email);
+    res.json({ token });
+};
 
 
 /*
