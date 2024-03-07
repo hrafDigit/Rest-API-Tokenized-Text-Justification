@@ -24,8 +24,12 @@ You should receive a response containing a JWT token ; which is mandatory to use
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import { generateToken, isWordLimitExceeded, incrementWordCount } from './auth';
 import justifyRouter from './justify';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
