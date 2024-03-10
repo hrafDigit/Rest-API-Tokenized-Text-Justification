@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Formation Concepteur-Développeur d'Application">
+    <meta name="author" content="Achraf hrafDigit">
+
+    <!-- Styles CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- [if lt IE 9]><script src="http://html5shiv.googlecode.com/trunk/html5.js"></script><! [endif] -->
+
+    <title>Rest-API-Tokenized-Text-Justification</title>
+
+    <!-- Mobile Specific Meta
+	================================================== -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+    <!-- Favicon
+	================================================== -->
+    <!-- JSON
+	================================================== -->
+    <!-- Cannonical
+	================================================== -->
+    <!-- <link rel="canonical" href="chemin/nomDuRepertoire/nomDufichier"> -->
+    <!-- Autres Styles CSS
+	================================================== -->
+    <!-- Libs & Frameworks
+	================================================== -->
+    <!-- <link rel="stylesheet" href="chemin/nomDuRepertoire/nomDufichier.css"> -->
+    <!-- Fonts
+	================================================== -->
+    <!-- <link rel="stylesheet" href="chemin/nomDuRepertoire/nomDufichier.css"> -->
+    <!-- Hraf
+	================================================== -->
+    <!-- Main CSS -->
+    <!-- Custom CSS -->
+    <!-- Responsive CSS -->
+</head>
+<!--[if IE 6 ]><body class="ie6 old_ie"><![endif]-->
+<!--[if IE 7 ]><body class="ie7 old_ie"><![endif]-->
+<!--[if IE 8 ]><body class="ie8"><![endif]-->
+<!--[if IE 9 ]><body class="ie9"><![endif]-->
+
+<body>
+    <header>
+        <!-- <nav>
+            <ul><li><a href="#"></a></li><li><a href="#"></a></li><li><a href="#"></a></li></ul>
+        </nav> -->
+        <!-- <h1></h1> -->
+    </header>
+    <!-- END Header -->
+
+    <main>
+        <section>
+        <!-- Warning W3C utilisation la section ne possède pas de balise 'h1', fortement recommandée  -->
+        <!-- La balise 'h1' définie dans 'article', pourrait être déplacée en début de 'section' -->
+            <!-- <h1></h1> -->
+            <article>
+                <!-- <h2></h2> -->
+    <textarea id="inputText" placeholder="Enter text to justify..."></textarea>
+    <button id="getTokenBtn">Get Token</button>
+    <button id="getAnotherTokenBtn">Get Another Token</button>
+    <button id="justifyBtn" disabled>Justify Text</button>
+    <textarea id="outputText" placeholder="Justified text will appear here..." readonly disabled></textarea>
+    <button id="resetBtn">Reset Text areas</button>
+
+            </article>
+        </section>
+        <!-- END Section -->
+    </main>
+    <!-- END Main -->
+
+    <aside></aside>
+    <!-- END Aside -->
+
+    <footer></footer>
+    <!-- END Footer -->
+
+    <!-- JAVASCRIPT
+	================================================== -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

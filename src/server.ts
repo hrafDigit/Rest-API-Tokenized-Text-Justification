@@ -29,6 +29,9 @@ import justifyRouter from './justify';
 import { tokenHandler } from './auth';
 import { wordLimitHandler } from './rateLimit';
 
+/* ---  'path' is needed for the GUI "app" feature I made as easterEgg ^^ */
+import path from 'path';
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -36,6 +39,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+
+/* --- 'path' is needed for the GUI "app" feature I made as easterEgg ^^ --- */
+// Serve static files from the 'app' folder
+const staticPath = path.join(__dirname, '../app');
+app.use('/app', express.static(staticPath));
 
 app.post('/api/token', tokenHandler);
 
