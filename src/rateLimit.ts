@@ -30,8 +30,6 @@ export function isWordLimitExceeded(token: string): boolean {
     return tokenWordCount[token]?.count > TOKEN_WORD_LIMIT;
 }
 
-// Define any other rate-limiting related functions here
-
 export const wordLimitHandler: express.RequestHandler = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1];
     if (!token) {
