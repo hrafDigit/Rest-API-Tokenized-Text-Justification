@@ -1,27 +1,3 @@
-// src/server.ts
-/* 
-–– Create Express Server ---
-Once created a file named server.ts inside the src directory,
-initialize an Express app, set up middleware for JSON parsing, and listen on a port.
-
-––– Create Token Generation Endpoint –––
-• Import the generateToken function in server.ts.
-• Implement a POST endpoint for generating tokens.
-
-––– Testing –––
-• Run the server using the following command:
-$ npx ts-node src/server.ts
-
-(if needed, open another terminal window)
-• Send a POST request to http://localhost:3000/api/token with JSON body like {"email": "foo@bar.com"} using cURL
-(or tools like Postman).
-$ curl -X POST -H "Content-Type: application/json" -d '{"email": "foo@bar.com"}' http://localhost:3000/api/token
-
-You should receive a response containing a JWT token ; which is mandatory to use the "justify text" feature.
-{"token":"token_received_appears_here"}
-*/
-
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -52,6 +28,31 @@ app.use('/api/justify', wordLimitHandler, justifyRouter);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+
+
+// src/server.ts
+/* 
+–– Create Express Server ---
+Once created a file named server.ts inside the src directory,
+initialize an Express app, set up middleware for JSON parsing, and listen on a port.
+
+––– Create Token Generation Endpoint –––
+• Import the generateToken function in server.ts.
+• Implement a POST endpoint for generating tokens.
+
+––– Testing –––
+• Run the server using the following command:
+$ npx ts-node src/server.ts
+
+(if needed, open another terminal window)
+• Send a POST request to http://localhost:3000/api/token with JSON body like {"email": "foo@bar.com"} using cURL
+(or tools like Postman).
+$ curl -X POST -H "Content-Type: application/json" -d '{"email": "foo@bar.com"}' http://localhost:3000/api/token
+
+You should receive a response containing a JWT token ; which is mandatory to use the "justify text" feature.
+{"token":"token_received_appears_here"}
+*/
 
 
 

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const getTokenBtn = document.getElementById('getTokenBtn');
     const getAnotherTokenBtn = document.getElementById('getAnotherTokenBtn');
@@ -127,6 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+
+/*
+––– Add comments and explanations here –––
+*/
 
 
 

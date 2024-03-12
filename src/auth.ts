@@ -1,11 +1,3 @@
-// src/auth.ts
-/*
-––– Implement Token Generation –––
-Once created a new file named auth.ts inside the src directory,
-implement a function to generate a JWT token.
-*/
-
-
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
@@ -49,6 +41,16 @@ export const tokenHandler: express.RequestHandler = (req, res) => {
     const token = generateToken(email);
     res.json({ token });
 };
+
+
+
+// src/auth.ts
+/*
+––– Implement Token Generation –––
+Once created a new file named auth.ts inside the src directory,
+implement a function to generate a JWT token.
+*/
+
 
 
 /*

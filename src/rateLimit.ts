@@ -1,4 +1,3 @@
-// rateLimit.ts
 import express from 'express';
 // import { isWordLimitExceeded } from './auth';
 
@@ -42,3 +41,37 @@ export const wordLimitHandler: express.RequestHandler = (req, res, next) => {
 
     next();
 };
+
+
+
+// rateLimit.ts
+/*
+––– Add comments and explanations here –––
+*/
+
+
+
+
+/*
+ __                        ___  ____                    __      
+/\ \                     /'___\/\  _`\   __          __/\ \__   
+\ \ \___   _ __    __   /\ \__/\ \ \/\ \/\_\     __ /\_\ \ ,_\  
+ \ \  _ `\/\`'__\/'__`\ \ \ ,__\\ \ \ \ \/\ \  /'_ `\/\ \ \ \/  
+  \ \ \ \ \ \ \//\ \L\.\_\ \ \_/ \ \ \_\ \ \ \/\ \L\ \ \ \ \ \_ 
+   \ \_\ \_\ \_\\ \__/.\_\\ \_\   \ \____/\ \_\ \____ \ \_\ \__\
+    \/_/\/_/\/_/ \/__/\/_/ \/_/    \/___/  \/_/\/___L\ \/_/\/__/
+                                                 /\____/        
+                                                 \_/__/         
+    ===================================================================
+    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+    ## TypeScript & Node.js ##
+    2024 © Achraf (aka hrafDigit)
+        https://www.achrafbel.fr
+        https://codepen.io/hraf
+        https://github.com/hrafdigit
+        made w/ ¶ from Paris, France
+        [ <3 ] Grand Jardin Digital
+        https://www.grandjardindigital.fr
+    ±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+    ================================================================== 
+*/

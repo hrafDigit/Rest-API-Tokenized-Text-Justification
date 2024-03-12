@@ -1,4 +1,3 @@
-// src/justify.ts
 import express from "express";
 import { incrementWordCount } from "./rateLimit";
 
@@ -66,6 +65,12 @@ router.post("/", (req, res) => {
 
 export default router;
 
+
+
+// src/justify.ts
+/*
+––– Add comments and explanations here –––
+*/
 
 
 
